@@ -3813,82 +3813,7 @@ body.modal-active {
 
 
 
-/* ===== PRINCIPAL SPONSORS - LARGER & PROMINENT ===== */
 
-/* Principal Sponsors Container */
-.sponsors-section {
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-.sponsors-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.6rem, 6vw, 2.2rem);
-    font-weight: 600;
-    color: var(--color-cream);
-    margin-bottom: 2rem;
-}
-
-/* Two Column Layout for Sponsors */
-.sponsors-two-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.sponsors-column {
-    text-align: center;
-}
-
-/* Make sponsor names LARGER and prominent like parents */
-.sponsors-column .sponsors-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.sponsor-name {
-    font-family: var(--font-heading) !important;
-    font-size: clamp(1.3rem, 4.5vw, 1.8rem) !important;
-    font-weight: 500 !important;
-    color: var(--color-cream) !important;
-    line-height: 1.4;
-    letter-spacing: 0.02em;
-    text-transform: none;
-}
-
-/* Mobile - Stack columns and adjust spacing */
-@media (max-width: 640px) {
-    .sponsors-title {
-        font-size: clamp(1.4rem, 5vw, 1.8rem);
-        margin-bottom: 1.5rem;
-    }
-    
-    .sponsors-two-columns {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .sponsor-name {
-        font-size: clamp(1.2rem, 4vw, 1.5rem) !important;
-    }
-    
-    .sponsors-column .sponsors-grid {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .sponsor-name {
-        font-size: 1.1rem !important;
-    }
-    
-    .sponsors-column .sponsors-grid {
-        gap: 0.9rem;
-    }
-}
 
 /* ===== MODERN MINIMALIST WEDDING DETAILS - ICON CENTERED ===== */
 .details-minimalist {
@@ -4141,6 +4066,293 @@ body.modal-active {
     
     .info-sub {
         font-size: 0.75rem;
+    }
+}
+
+
+
+
+/* ===== ENTOURAGE SECTION - UNIFORM TYPOGRAPHY ===== */
+
+/* All section titles in entourage use same font */
+.entourage-cinematic .cinematic-title,
+.entourage-cinematic .sponsors-title,
+.entourage-cinematic .entourage-col-title,
+.entourage-cinematic .parent-label,
+.entourage-cinematic .role-label,
+.entourage-cinematic .cinematic-subtitle {
+    font-family: var(--font-heading);
+}
+
+/* Main Title */
+.entourage-cinematic .cinematic-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-cream);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Subtitle */
+.entourage-cinematic .cinematic-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(230, 226, 217, 0.8);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Parent Labels */
+.entourage-cinematic .parent-label {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-sage-soft);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+/* Parent Names */
+.entourage-cinematic .parent-names {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4.5vw, 2rem);
+    font-weight: 500;
+    color: var(--color-cream);
+    line-height: 1.4;
+}
+
+/* Principal Sponsors Title */
+.entourage-cinematic .sponsors-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-cream);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Principal Sponsors Names */
+.entourage-cinematic .sponsor-name {
+    font-family: var(--font-heading) !important;
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem) !important;
+    font-weight: 500 !important;
+    color: var(--color-cream) !important;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+}
+
+/* Groomsmen & Bridesmaids Titles */
+.entourage-cinematic .entourage-col-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+    font-weight: 500;
+    color: var(--color-cream);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    position: relative;
+}
+
+.entourage-cinematic .entourage-col-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--color-sage);
+}
+
+/* Entourage List Names */
+.entourage-cinematic .entourage-list li {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    font-weight: 400;
+    color: rgba(230, 226, 217, 0.88);
+    padding: 0.5rem 0;
+}
+
+/* Special Roles Labels */
+.entourage-cinematic .role-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-sage-soft);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Special Roles Names */
+.entourage-cinematic .role-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+    font-weight: 500;
+    color: var(--color-cream);
+    line-height: 1.5;
+}
+
+/* Parents Grid */
+.entourage-cinematic .parents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+/* Sponsors Two Columns */
+.entourage-cinematic .sponsors-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.entourage-cinematic .sponsors-column {
+    text-align: center;
+}
+
+.entourage-cinematic .sponsors-column .sponsors-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Entourage Grid */
+.entourage-cinematic .entourage-grid-cinematic {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.entourage-cinematic .entourage-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Special Roles Wrapper */
+.entourage-cinematic .special-roles-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+}
+
+.entourage-cinematic .roles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem 3.5rem;
+    margin: 0 auto;
+}
+
+.entourage-cinematic .role-item {
+    text-align: center;
+    min-width: 160px;
+}
+
+/* Section Divider */
+.entourage-cinematic .section-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-sage), var(--color-olive-light), var(--color-sage), transparent);
+    margin: 2rem auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .entourage-cinematic .cinematic-title {
+        font-size: clamp(2rem, 7vw, 3.5rem);
+    }
+    
+    .entourage-cinematic .parent-names {
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+    }
+    
+    .entourage-cinematic .sponsors-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    
+    .entourage-cinematic .sponsor-name {
+        font-size: clamp(1.1rem, 4vw, 1.5rem) !important;
+    }
+    
+    .entourage-cinematic .entourage-col-title {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+    }
+    
+    .entourage-cinematic .entourage-list li {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+    
+    .entourage-cinematic .role-name {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+    
+    .entourage-cinematic .roles-grid {
+        gap: 1.8rem 2.5rem;
+    }
+    
+    .entourage-cinematic .role-item {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 640px) {
+    .entourage-cinematic .sponsors-two-columns {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .entourage-cinematic .sponsors-column .sponsors-grid {
+        gap: 1rem;
+    }
+    
+    .entourage-cinematic .roles-grid {
+        gap: 1.5rem 2rem;
+    }
+    
+    .entourage-cinematic .role-item {
+        min-width: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .entourage-cinematic .cinematic-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+    
+    .entourage-cinematic .cinematic-subtitle {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+    }
+    
+    .entourage-cinematic .parent-label {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+    }
+    
+    .entourage-cinematic .sponsor-name {
+        font-size: 1rem !important;
+    }
+    
+    .entourage-cinematic .entourage-col-title {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+    
+    .entourage-cinematic .role-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
     }
 }
     </style>
