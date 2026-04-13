@@ -3813,11 +3813,27 @@ body.modal-active {
 
 
 
-/* ===== PRINCIPAL SPONSORS TWO COLUMNS ===== */
+/* ===== PRINCIPAL SPONSORS - PROMINENT LIKE PARENTS ===== */
+
+/* Principal Sponsors Container */
+.sponsors-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.sponsors-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 600;
+    color: var(--color-cream);
+    margin-bottom: 2rem;
+}
+
+/* Two Column Layout for Sponsors */
 .sponsors-two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -3826,24 +3842,44 @@ body.modal-active {
     text-align: center;
 }
 
+/* Make sponsor names prominent like parents */
 .sponsors-column .sponsors-grid {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.8rem;
 }
 
-/* Mobile - Stack columns */
+.sponsor-name {
+    font-family: var(--font-heading) !important;
+    font-size: clamp(1rem, 3.5vw, 1.3rem) !important;
+    font-weight: 500 !important;
+    color: var(--color-cream) !important;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    text-transform: none;
+}
+
+/* Mobile - Stack columns and adjust spacing */
 @media (max-width: 640px) {
     .sponsors-two-columns {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
+    .sponsor-name {
+        font-size: clamp(0.95rem, 3vw, 1.2rem) !important;
+    }
+    
     .sponsors-column .sponsors-grid {
-        gap: 0.5rem;
+        gap: 0.6rem;
     }
 }
 
+@media (max-width: 400px) {
+    .sponsor-name {
+        font-size: 0.9rem !important;
+    }
+}
 
 
 /* ===== MODERN MINIMALIST WEDDING DETAILS - ICON CENTERED ===== */
@@ -4311,48 +4347,48 @@ body.modal-active {
         
         <div class="section-divider"></div>
         
-        <!-- Principal Sponsors - Two Columns -->
-        <div class="cinematic-section" data-delay="1">
-            <div class="sponsors-section">
-                <h3 class="sponsors-title">Principal Sponsors</h3>
-                
-                <div class="sponsors-two-columns">
-                    <!-- Left Column - Male Sponsors -->
-                    <div class="sponsors-column">
-                        <div class="sponsors-grid">
-                            <span class="sponsor-name">Manuel Laderas</span>
-                            <span class="sponsor-name">Rix Villareal</span>
-                            <span class="sponsor-name">Leo Portales</span>
-                            <span class="sponsor-name">Reynan Portales</span>
-                            <span class="sponsor-name">Renato Estrecho</span>
-                            <span class="sponsor-name">Armando Romasanta Sr.</span>
-                            <span class="sponsor-name">Charmie Calupig</span>
-                            <span class="sponsor-name">Michael Esguerra Principe</span>
-                            <span class="sponsor-name">Bernie Calupig</span>
-                            <span class="sponsor-name">Sancho Limpin</span>
-                            <span class="sponsor-name">Arnold Salas</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Right Column - Female Sponsors -->
-                    <div class="sponsors-column">
-                        <div class="sponsors-grid">
-                            <span class="sponsor-name">Myra Laderas</span>
-                            <span class="sponsor-name">Win Villareal</span>
-                            <span class="sponsor-name">Vivian Portales</span>
-                            <span class="sponsor-name">Levy Supremo</span>
-                            <span class="sponsor-name">Michelle Portales</span>
-                            <span class="sponsor-name">Dorothy Junsay</span>
-                            <span class="sponsor-name">Elijah Gonzales</span>
-                            <span class="sponsor-name">Lucy Calupig</span>
-                            <span class="sponsor-name">Fe Arante Principe</span>
-                            <span class="sponsor-name">Nieves Sanchez Calupig</span>
-                            <span class="sponsor-name">Marife Salas</span>
-                        </div>
-                    </div>
+       <!-- Principal Sponsors - Two Columns -->
+<div class="cinematic-section" data-delay="1">
+    <div class="sponsors-section">
+        <h3 class="sponsors-title">Principal Sponsors</h3>
+        
+        <div class="sponsors-two-columns">
+            <!-- Left Column - Male Sponsors -->
+            <div class="sponsors-column">
+                <div class="sponsors-grid">
+                    <div class="sponsor-name">Manuel Laderas</div>
+                    <div class="sponsor-name">Rix Villareal</div>
+                    <div class="sponsor-name">Leo Portales</div>
+                    <div class="sponsor-name">Reynan Portales</div>
+                    <div class="sponsor-name">Renato Estrecho</div>
+                    <div class="sponsor-name">Armando Romasanta Sr.</div>
+                    <div class="sponsor-name">Charmie Calupig</div>
+                    <div class="sponsor-name">Michael Esguerra Principe</div>
+                    <div class="sponsor-name">Bernie Calupig</div>
+                    <div class="sponsor-name">Sancho Limpin</div>
+                    <div class="sponsor-name">Arnold Salas</div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Female Sponsors -->
+            <div class="sponsors-column">
+                <div class="sponsors-grid">
+                    <div class="sponsor-name">Myra Laderas</div>
+                    <div class="sponsor-name">Win Villareal</div>
+                    <div class="sponsor-name">Vivian Portales</div>
+                    <div class="sponsor-name">Levy Supremo</div>
+                    <div class="sponsor-name">Michelle Portales</div>
+                    <div class="sponsor-name">Dorothy Junsay</div>
+                    <div class="sponsor-name">Elijah Gonzales</div>
+                    <div class="sponsor-name">Lucy Calupig</div>
+                    <div class="sponsor-name">Fe Arante Principe</div>
+                    <div class="sponsor-name">Nieves Sanchez Calupig</div>
+                    <div class="sponsor-name">Marife Salas</div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
         
         <div class="section-divider"></div>
         
@@ -4383,12 +4419,12 @@ body.modal-active {
                     <ul class="entourage-list">
                         <li>Jessabel Supremo</li>
                         <li>Sabel Supremo</li>
+                        <li>Carmel Junsay</li>
+                        <li>Andrea Mae Portales</li>
+                        <li>Lyka Portales</li>
                         <li>Rubby Parole</li>
-                        <li>Ayel Junsay</li>
                         <li>Ruchel Calupig</li>
                         <li>Manilyn Alejandro</li>
-                        <li>Lyka Portales</li>
-                        <li>Andrea Mae Portales</li>
                     </ul>
                 </div>
             </div>
