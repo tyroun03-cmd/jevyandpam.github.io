@@ -3813,7 +3813,7 @@ body.modal-active {
 
 
 
-/* ===== PRINCIPAL SPONSORS - PROMINENT LIKE PARENTS ===== */
+/* ===== PRINCIPAL SPONSORS - LARGER & PROMINENT ===== */
 
 /* Principal Sponsors Container */
 .sponsors-section {
@@ -3823,7 +3823,7 @@ body.modal-active {
 
 .sponsors-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
     font-weight: 600;
     color: var(--color-cream);
     margin-bottom: 2rem;
@@ -3833,8 +3833,8 @@ body.modal-active {
 .sponsors-two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    max-width: 900px;
+    gap: 3rem;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -3842,45 +3842,53 @@ body.modal-active {
     text-align: center;
 }
 
-/* Make sponsor names prominent like parents */
+/* Make sponsor names LARGER and prominent like parents */
 .sponsors-column .sponsors-grid {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1.2rem;
 }
 
 .sponsor-name {
     font-family: var(--font-heading) !important;
-    font-size: clamp(1rem, 3.5vw, 1.3rem) !important;
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem) !important;
     font-weight: 500 !important;
     color: var(--color-cream) !important;
-    line-height: 1.5;
+    line-height: 1.4;
     letter-spacing: 0.02em;
     text-transform: none;
 }
 
 /* Mobile - Stack columns and adjust spacing */
 @media (max-width: 640px) {
+    .sponsors-title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+        margin-bottom: 1.5rem;
+    }
+    
     .sponsors-two-columns {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .sponsor-name {
-        font-size: clamp(0.95rem, 3vw, 1.2rem) !important;
+        font-size: clamp(1.2rem, 4vw, 1.5rem) !important;
     }
     
     .sponsors-column .sponsors-grid {
-        gap: 0.6rem;
+        gap: 1rem;
     }
 }
 
 @media (max-width: 400px) {
     .sponsor-name {
-        font-size: 0.9rem !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .sponsors-column .sponsors-grid {
+        gap: 0.9rem;
     }
 }
-
 
 /* ===== MODERN MINIMALIST WEDDING DETAILS - ICON CENTERED ===== */
 .details-minimalist {
