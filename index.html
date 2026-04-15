@@ -4355,6 +4355,106 @@ body.modal-active {
         letter-spacing: 2px;
     }
 }
+
+
+/* ===== CINEMATIC VIDEO INTRO STYLES ===== */
+
+.intro-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    background: transparent;
+}
+
+/* White flash overlay for elegant transitions */
+.white-flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.white-flash-overlay.active {
+    opacity: 1;
+}
+
+/* Hide video during white flash */
+.intro-video.hidden {
+    opacity: 0;
+}
+
+/* Invitation text layer - transparent background */
+.invitation-text-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background: transparent !important;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth overlay fade out */
+.slideshow-overlay {
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile video optimization */
+@media (max-width: 768px) {
+    .intro-video {
+        object-fit: cover;
+    }
+}
+
+/* Hide video controls */
+.intro-video::-webkit-media-controls {
+    display: none !important;
+}
+
+.intro-video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+
+/* Pulse animation for button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px rgba(255,255,255,0.4), 0 0 10px rgba(255,255,255,0.2), 0 0 15px rgba(255,255,255,0.1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255,255,255,0.4), 0 0 10px rgba(255,255,255,0.2), 0 0 15px rgba(255,255,255,0.1);
+    }
+}
+
+
+.intro-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    background: transparent;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
     </style>
 </head>
 <body>
@@ -4365,123 +4465,45 @@ body.modal-active {
     Your browser does not support the audio element.
 </audio>
 
+<!-- CINEMATIC VIDEO INTRO OVERLAY -->
 <div id="slideshowOverlay" class="slideshow-overlay">
     <div class="slideshow-container" id="slideshowContainer">
         
-        <img id="mainImage" class="main-slide-image" alt="Jevy & Pam Wedding">
-
-<!-- Invitation Text Layer -->
-<div id="invitationTextLayer" class="invitation-text-layer" style="
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-">
-    <!-- Background Image Container for Slideshow -->
-    <div id="slideshowBg" style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-    ">
-        <img id="bgImage1" class="slideshow-bg-image active" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&h=800&fit=crop" style="position: absolute; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform: scale(1);">
-        <img id="bgImage2" class="slideshow-bg-image" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop" style="position: absolute; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform: scale(1); opacity: 0;">
-        <img id="bgImage3" class="slideshow-bg-image" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&h=800&fit=crop" style="position: absolute; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform: scale(1); opacity: 0;">
-    </div>
-    
-    <!-- Text Content - All White, No Overlay -->
-    <div style="
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        max-width: 90%;
-        padding: 2rem;
-    ">
-
-        <div class="line" style="background: rgba(255, 255, 255, 0.4); width: 60px; height: 1px; margin: 0 auto 1.5rem auto;"></div>
-
-        <h3 class="subtitle reveal delay-1" style="
-            color: white;
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        ">You are cordially invited to the Wedding of</h3>
+        <!-- Video Background - Shows first frame as static background -->
+        <video id="introVideo" class="intro-video" playsinline muted preload="auto">
+            <source src="https://i.imgur.com/3f9nAYx.mp4" type="video/mp4">
+            Your browser does not support the video element.
+        </video>
         
-        <h1 class="couple-name reveal delay-2" style="
-            color: white;
-            font-size: clamp(2.8rem, 10vw, 5rem);
-            font-weight: 700;
-            margin: 0.5rem 0;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        ">Jevy & Pam</h1>
+        <!-- Main Image for 3-Photo Slideshow (hidden initially) -->
+        <img id="mainImage" class="main-slide-image" alt="Jevy & Pam Wedding" style="display: none; opacity: 0;">
         
-        <p class="tagline reveal delay-3" style="
-            color: white;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        ">Join us as we celebrate our wedding on</p>
-
-        <div class="date reveal delay-4" style="
-            color: white;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin: 1rem 0 2rem 0;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        ">June 13, 2026</div>
-
-        <button class="open-invitation-btn reveal delay-5" id="openInvitationBtn" style="
-            background: white;
-            border: none;
-            padding: 0.9rem 2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: var(--font-body);
-            color: #333;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            position: relative;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3), 0 0 30px rgba(255,255,255,0.2);
-            animation: pulse 2s infinite;
-        ">
-            <i class="fas fa-envelope-open-text"></i> Open Invitation
-        </button>
-
-        <div class="line" style="background: rgba(255, 255, 255, 0.4); width: 60px; height: 1px; margin: 1.5rem auto 0 auto;"></div>
-
-    </div>
-</div>
-
-<style>
-    @keyframes pulse {
-        0% {
-            box-shadow: 0 0 5px rgba(255,255,255,0.4), 0 0 10px rgba(255,255,255,0.2), 0 0 15px rgba(255,255,255,0.1);
-        }
-        50% {
-            box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
-        }
-        100% {
-            box-shadow: 0 0 5px rgba(255,255,255,0.4), 0 0 10px rgba(255,255,255,0.2), 0 0 15px rgba(255,255,255,0.1);
-        }
-    }
-</style>
+        <!-- Invitation Text Layer - Overlaid on Video -->
+        <div id="invitationTextLayer" class="invitation-text-layer" style="background: transparent;">
+            
+            <!-- Text Content -->
+            <div style="position: relative; z-index: 2; text-align: center; max-width: 90%; padding: 2rem;">
+                <div class="line" style="background: rgba(255, 255, 255, 0.5); width: 60px; height: 1px; margin: 0 auto 1.5rem auto;"></div>
+                <h3 class="subtitle reveal delay-1" style="color: white; font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 400; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">You are cordially invited to the Wedding of</h3>
+                <h1 class="couple-name reveal delay-2" style="color: white; font-size: clamp(2.8rem, 10vw, 5rem); font-weight: 700; margin: 0.5rem 0; text-shadow: 0 4px 15px rgba(0,0,0,0.4);">Jevy & Pam</h1>
+                <p class="tagline reveal delay-3" style="color: white; font-size: 0.9rem; margin: 1rem 0; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">Join us as we celebrate our wedding on</p>
+                <div class="date reveal delay-4" style="color: white; font-size: 1.1rem; letter-spacing: 3px; margin: 1rem 0 2rem 0; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">June 13, 2026</div>
+                <button class="open-invitation-btn reveal delay-5" id="openInvitationBtn" style="background: white; border: none; padding: 0.9rem 2rem; font-size: 0.9rem; font-weight: 600; font-family: var(--font-body); color: #333; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; position: relative; box-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3), 0 0 30px rgba(255,255,255,0.2); animation: pulse 2s infinite;">
+                    <i class="fas fa-envelope-open-text"></i> Open Invitation
+                </button>
+                <div class="line" style="background: rgba(255, 255, 255, 0.5); width: 60px; height: 1px; margin: 1.5rem auto 0 auto;"></div>
+            </div>
+        </div>
+        
+        <!-- White Flash Overlay for Transitions -->
+        <div class="white-flash-overlay"></div>
     </div>
 </div>
 
 
 <div id="mainContent" class="main-content">
     <div class="hero-section">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&h=800&fit=crop" alt="Romantic wedding garden">
+        <img class="hero-bg" src="https://i.imgur.com/Fwi29Nb.jpeg?w=1200&h=800&fit=crop" alt="Romantic wedding garden">
         <div class="hero-overlay"></div>
         <div class="hero-particles" id="particlesContainer"></div>
 
@@ -5416,59 +5438,141 @@ document.addEventListener('keydown', (e) => {
 // Add this variable at the top of your IIFE, near other variables (around line 650-660)
 let envelopeOpened = false;
 
-// Replace the existing runSlideshow function with this:
+
+
+
+// Enhanced cinematic video intro - video shows first frame, plays on click
 async function runSlideshow() {
-    // Get elements
     const openBtn = document.getElementById('openInvitationBtn');
     const bgMusic = document.getElementById('bgMusic');
-    let slideshowStarted = false;
+    const introVideo = document.getElementById('introVideo');
+    const mainImage = document.getElementById('mainImage');
+    const invitationLayer = document.getElementById('invitationTextLayer');
+    const slideshowContainer = document.getElementById('slideshowContainer');
+    const slideshowOverlay = document.getElementById('slideshowOverlay');
+    const whiteFlashOverlay = document.querySelector('.white-flash-overlay');
+    const mainContentDiv = document.getElementById('mainContent');
     
-    // Disable music autoplay
+    let slideshowStarted = false;
+    let fadeStarted = false;
+    
+    // Show first frame of video as static background
+    if (introVideo) {
+        introVideo.load();
+    }
+    
+    // Disable music autoplay initially
     if (bgMusic) {
         bgMusic.autoplay = false;
         bgMusic.load();
     }
     
-    // If button doesn't exist yet, wait for it
     if (!openBtn) {
-        console.log('Button not found, retrying...');
         setTimeout(runSlideshow, 100);
         return;
     }
     
-    // Wait for button click
     openBtn.addEventListener('click', async () => {
         if (slideshowStarted) return;
         slideshowStarted = true;
         
+        // INSTANTLY fade invitation text to white
+        invitationLayer.style.transition = 'opacity 0.5s ease';
+        invitationLayer.style.opacity = '0';
+        
         // Start background music
         if (bgMusic) {
             bgMusic.volume = 0.3;
-            bgMusic.play().catch(e => console.log('Music needs user interaction first:', e));
+            bgMusic.play().catch(e => console.log('Music needs user interaction:', e));
         }
         
-        // Original slideshow logic continues below
+        // Wait for text to fade out
         await new Promise(r => setTimeout(r, 200));
         
-        invitationLayer.style.transition = 'opacity 0.5s';
-        invitationLayer.style.opacity = '0';
+        // Play video from beginning
+        introVideo.currentTime = 0;
+        try {
+            await introVideo.play();
+            console.log('Video playing');
+        } catch (e) {
+            console.log('Video play error:', e);
+            introVideo.muted = true;
+            await introVideo.play();
+        }
         
-        const flash = document.createElement('div');
-        flash.className = 'white-flash';
-        slideshowContainer.appendChild(flash);
-        requestAnimationFrame(() => flash.style.opacity = '1');
-        await new Promise(r => setTimeout(r, 500));
+        // Monitor video time to start fade near the end (last 0.2 seconds)
+        const checkTime = () => {
+            if (introVideo.duration && introVideo.currentTime) {
+                const timeRemaining = introVideo.duration - introVideo.currentTime;
+                
+                // Start fade when 0.2 seconds remain
+                if (timeRemaining <= 0.2 && !fadeStarted) {
+                    fadeStarted = true;
+                    console.log('Starting fade to white...');
+                    
+                    // Quick fade video out
+                    introVideo.style.transition = 'opacity 0.5s ease';
+                    introVideo.style.opacity = '0';
+                    
+                    // Quick fade white flash overlay in
+                    whiteFlashOverlay.style.transition = 'opacity 0.5s ease';
+                    whiteFlashOverlay.style.opacity = '1';
+                    
+                    // Remove timeupdate listener
+                    introVideo.removeEventListener('timeupdate', checkTime);
+                }
+            }
+        };
         
-        invitationLayer.style.display = 'none';
+        introVideo.addEventListener('timeupdate', checkTime);
+        
+        // Wait for video to end
+        await new Promise(resolve => {
+            if (introVideo.ended) {
+                resolve();
+            } else {
+                introVideo.addEventListener('ended', resolve, { once: true });
+            }
+        });
+        
+        // Clean up timeupdate listener
+        introVideo.removeEventListener('timeupdate', checkTime);
+        
+        // If fade didn't trigger, trigger it now
+        if (!fadeStarted) {
+            introVideo.style.transition = 'opacity 0.5s ease';
+            introVideo.style.opacity = '0';
+            whiteFlashOverlay.style.transition = 'opacity 0.5s ease';
+            whiteFlashOverlay.style.opacity = '1';
+        }
+        
+        // Ensure white flash is fully visible
+        whiteFlashOverlay.style.opacity = '1';
+        
+        await new Promise(r => setTimeout(r, 200));
+        
+        // Hide video, show main image for 3-photo slideshow
+        introVideo.style.display = 'none';
+        mainImage.style.display = 'block';
         mainImage.src = PHOTO_URLS[0];
+        mainImage.style.opacity = '0';
+        
+        // Fade out white flash to reveal first photo
+        whiteFlashOverlay.style.opacity = '0';
+        
+        // Fade in first photo
+        await new Promise(r => setTimeout(r, 200));
+        mainImage.style.transition = 'opacity 0.8s ease';
         mainImage.style.opacity = '1';
-        flash.style.opacity = '0';
+        
         await new Promise(r => setTimeout(r, 500));
-        flash.remove();
+        
+        // === 3-PHOTO SLIDESHOW SEQUENCE ===
         await new Promise(r => setTimeout(r, 1200));
         mainImage.style.opacity = '0';
         await new Promise(r => setTimeout(r, 500));
         
+        // Photo 2
         const flash2 = document.createElement('div');
         flash2.className = 'white-flash';
         slideshowContainer.appendChild(flash2);
@@ -5483,6 +5587,7 @@ async function runSlideshow() {
         mainImage.style.opacity = '0';
         await new Promise(r => setTimeout(r, 500));
         
+        // Photo 3
         const flash3 = document.createElement('div');
         flash3.className = 'white-flash';
         slideshowContainer.appendChild(flash3);
@@ -5497,6 +5602,7 @@ async function runSlideshow() {
         mainImage.style.opacity = '0';
         await new Promise(r => setTimeout(r, 500));
         
+        // Final white flash and reveal main content
         const finalFlash = document.createElement('div');
         finalFlash.className = 'white-flash';
         slideshowContainer.appendChild(finalFlash);
@@ -6399,113 +6505,7 @@ window.addEventListener("scroll", () => {
 
 
 
-     (function() {
-        // Photos for the invitation slideshow
-        const invitationPhotos = [
-            "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&h=800&fit=crop",
-            "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop",
-            "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&h=800&fit=crop"
-        ];
-        
-        let currentPhotoIndex = 0;
-        let slideshowInterval = null;
-        let isTransitioning = false;
-        
-        const bgImage1 = document.getElementById('bgImage1');
-        const bgImage2 = document.getElementById('bgImage2');
-        const bgImage3 = document.getElementById('bgImage3');
-        
-        // Get active image
-        function getActiveImage() {
-            return document.querySelector('.slideshow-bg-image.active');
-        }
-        
-        // Get next image
-        function getNextImage() {
-            const active = getActiveImage();
-            if (active === bgImage1) return bgImage2;
-            if (active === bgImage2) return bgImage3;
-            return bgImage1;
-        }
-        
-        // Smooth fade transition only (no zoom)
-        async function transitionToNextPhoto() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            
-            const activeImage = getActiveImage();
-            const nextImage = getNextImage();
-            
-            // Prepare next image with new photo
-            const nextIndex = (currentPhotoIndex + 1) % invitationPhotos.length;
-            nextImage.src = invitationPhotos[nextIndex];
-            nextImage.style.opacity = '0';
-            
-            // Force reflow
-            void nextImage.offsetHeight;
-            
-            // Begin smooth crossfade - next image fades in
-            nextImage.style.opacity = '1';
-            activeImage.style.opacity = '0';
-            
-            // Wait for fade to complete
-            await new Promise(resolve => setTimeout(resolve, 1200));
-            
-            // Complete the transition
-            activeImage.classList.remove('active');
-            nextImage.classList.add('active');
-            
-            // Update current index
-            currentPhotoIndex = nextIndex;
-            
-            isTransitioning = false;
-        }
-        
-        // Start slideshow
-        function startInvitationSlideshow() {
-            if (slideshowInterval) clearInterval(slideshowInterval);
-            
-            // Set initial active image
-            bgImage1.classList.add('active');
-            bgImage1.style.opacity = '1';
-            bgImage2.style.opacity = '0';
-            bgImage3.style.opacity = '0';
-            currentPhotoIndex = 0;
-            
-            // Change photo every 4 seconds
-            slideshowInterval = setInterval(() => {
-                transitionToNextPhoto();
-            }, 4000);
-        }
-        
-        // Stop slideshow
-        function stopInvitationSlideshow() {
-            if (slideshowInterval) {
-                clearInterval(slideshowInterval);
-                slideshowInterval = null;
-            }
-        }
-        
-        // Start when page loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startInvitationSlideshow);
-        } else {
-            startInvitationSlideshow();
-        }
-        
-        // Stop slideshow when user clicks "Open Invitation"
-        const openBtn = document.getElementById('openInvitationBtn');
-        if (openBtn) {
-            openBtn.addEventListener('click', () => {
-                stopInvitationSlideshow();
-            });
-        }
-        
-        window.invitationSlideshow = {
-            stop: stopInvitationSlideshow,
-            start: startInvitationSlideshow
-        };
-    })();
+
 
 
 
