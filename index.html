@@ -4530,32 +4530,63 @@ body.modal-active {
     opacity: 1;
 }
 
-/* Mobile Responsive for gallery */
+//* REPLACE the existing mobile carousel sizes */
 @media (max-width: 768px) {
-    .nav-btn {
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
+    .carousel-wrapper { 
+        min-height: 480px;  /* was 420px */
+        perspective: 1000px; 
     }
-    
-    #prevBtn { left: 10px; }
-    #nextBtn { right: 10px; }
-    
-    .photo-counter {
-        font-size: 0.75rem;
-        margin-top: 1.2rem;
+    .carousel-3d { 
+        height: 430px;  /* was 380px */
+    }
+    .carousel-item { 
+        width: 300px;      /* was 260px */
+        height: 400px;     /* was 350px */
+        margin-left: -150px;  /* was -130px */
+        margin-top: -200px;   /* was -175px */
+    }
+    .nav-btn { 
+        width: 44px; 
+        height: 44px; 
+        font-size: 1.1rem; 
     }
 }
 
 @media (max-width: 640px) {
-    .nav-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
+    .carousel-wrapper { 
+        min-height: 420px;  /* was 380px */
     }
-    
+    .carousel-3d { 
+        height: 380px;  /* was 340px */
+    }
+    .carousel-item { 
+        width: 260px;      /* was 220px */
+        height: 340px;     /* was 300px */
+        margin-left: -130px;  /* was -110px */
+        margin-top: -170px;   /* was -150px */
+    }
+    .nav-btn { 
+        width: 38px; 
+        height: 38px; 
+        font-size: 1rem; 
+    }
     #prevBtn { left: 5px; }
     #nextBtn { right: 5px; }
+    .roles-grid { 
+        gap: 1.2rem 1.8rem; 
+    }
+    .role-item { 
+        min-width: 120px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item { 
+        width: 230px;      /* was 190px */
+        height: 310px;     /* was 260px */
+        margin-left: -115px;  /* was -95px */
+        margin-top: -155px;   /* was -130px */
+    }
 }
 
 
@@ -4677,6 +4708,43 @@ body.lightbox-open .nav-btn {
     
     #prevBtn { left: 5px; }
     #nextBtn { right: 5px; }
+}
+
+
+/* Target Android devices specifically */
+@media (max-width: 768px) and (pointer: coarse) and (hover: none) {
+    /* Only apply if not iOS */
+    @supports not (-webkit-overflow-scrolling: touch) {
+        /* Android-specific overrides */
+        .carousel-item {
+            width: 260px !important;
+            height: 350px !important;
+            margin-left: -130px !important;
+            margin-top: -175px !important;
+        }
+    }
+}
+
+@media (max-width: 640px) and (pointer: coarse) and (hover: none) {
+    @supports not (-webkit-overflow-scrolling: touch) {
+        .carousel-item {
+            width: 220px !important;
+            height: 300px !important;
+            margin-left: -110px !important;
+            margin-top: -150px !important;
+        }
+    }
+}
+
+@media (max-width: 480px) and (pointer: coarse) and (hover: none) {
+    @supports not (-webkit-overflow-scrolling: touch) {
+        .carousel-item {
+            width: 190px !important;
+            height: 260px !important;
+            margin-left: -95px !important;
+            margin-top: -130px !important;
+        }
+    }
 }
 
     </style>
@@ -5511,7 +5579,7 @@ function buildCarousel() {
 
     const angleStep = 360 / total;
     const isMobile = window.innerWidth <= 640;
-    const radius = isMobile ? 200 : 360;
+    const radius = isMobile ? 240 : 360;  // was 200
 
     items.forEach((item, idx) => {
         let angle = angleStep * idx - (angleStep * currentIndex);
