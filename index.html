@@ -4789,6 +4789,105 @@ body.lightbox-open .nav-btn {
 }
 
 
+
+/* ===== DYNAMIC GUEST FIELDS ===== */
+.dynamic-guests-container {
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.accompanying-guest-field {
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.4s ease;
+}
+
+.accompanying-guest-field label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.7rem;
+}
+
+.accompanying-guest-field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(168, 183, 159, 0.4);
+    padding: 0.6rem 0 0.8rem 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-olive);
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.accompanying-guest-field input:focus {
+    outline: none;
+    border-bottom-color: var(--color-olive-light);
+}
+
+.guest-number-hint {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--color-olive-light);
+    margin-top: 0.3rem;
+    font-style: italic;
+}
+
+/* For forced modal */
+.forced-dynamic-guests {
+    margin-top: 0.3rem;
+}
+
+.forced-accompanying-guest {
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.4s ease;
+}
+
+.forced-accompanying-guest label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.forced-accompanying-guest input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(168, 183, 159, 0.4);
+    padding: 0.4rem 0 0.6rem 0;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-olive);
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.forced-accompanying-guest input:focus {
+    outline: none;
+    border-bottom-color: var(--color-olive-light);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -4930,7 +5029,7 @@ body.lightbox-open .nav-btn {
                 <div class="sponsors-grid">
                     <div class="sponsor-name">Manuel Laderas</div>
                     <div class="sponsor-name">Rix Villareal</div>
-                    <div class="sponsor-name">Leovigildo Portales</div>
+                    <div class="sponsor-name">Leo Portales</div>
                     <div class="sponsor-name">Reynan Portales</div>
                     <div class="sponsor-name">Charmie Calupig</div>
                     <div class="sponsor-name">Michael Esguerra Principe</div>
@@ -4944,12 +5043,12 @@ body.lightbox-open .nav-btn {
             <div class="sponsors-column">
                 <div class="sponsors-grid">
                     <div class="sponsor-name">Myra Laderas</div>
-                    <div class="sponsor-name">Winnie Villareal</div>
+                    <div class="sponsor-name">Win Villareal</div>
                     <div class="sponsor-name">Vivian Portales</div>
                     <div class="sponsor-name">Levy Supremo</div>
                     <div class="sponsor-name">Michelle Portales</div>
                     <div class="sponsor-name">Dorothy Junsay</div>
-                    <div class="sponsor-name">Portia Leander</div>
+                    <div class="sponsor-name">Elijah Gonzales</div>
                     <div class="sponsor-name">Lucy Calupig</div>
                     <div class="sponsor-name">Fe Arante Principe</div>
                     <div class="sponsor-name">Nieves Sanchez Calupig</div>
@@ -5309,27 +5408,31 @@ body.lightbox-open .nav-btn {
             </div>
             
             <div class="form-row">
-                <div class="form-group">
-                    <label for="attending">Attendance</label>
-                    <select id="attending" required>
-                        <option value="" disabled selected>— Select —</option>
-                        <option value="Yes, absolutely">Yes, absolutely</option>
-                        <option value="Sadly, no">Sadly, no</option>
-                    </select>
-                    <span class="input-line"></span>
-                </div>
-                <div class="form-group">
-                    <label for="guests">Number of Guests</label>
-                    <input type="number" id="guests" value="1" min="1" max="10">
-                    <span class="input-line"></span>
-                </div>
-            </div>
-            
-            <div class="form-group full-width">
-                <label for="message">Message</label>
-                <textarea id="message" rows="2" placeholder="Send your message"></textarea>
-                <span class="input-line"></span>
-            </div>
+    <div class="form-group">
+        <label for="attending">Attendance</label>
+        <select id="attending" required>
+            <option value="" disabled selected>— Select —</option>
+            <option value="Yes, absolutely">Yes, absolutely</option>
+            <option value="Sadly, no">Sadly, no</option>
+        </select>
+        <span class="input-line"></span>
+    </div>
+    <div class="form-group">
+        <label for="guests">Number of Guests (including you)</label>
+        <input type="number" id="guests" value="1" min="1" max="10">
+        <span class="input-line"></span>
+        <div class="guest-number-hint">If bringing others, please add their names below</div>
+    </div>
+</div>
+
+<!-- Dynamic Accompanying Guest Fields Container -->
+<div id="dynamicGuestsContainer" class="dynamic-guests-container" style="display: none;"></div>
+
+<div class="form-group full-width">
+    <label for="message">Message</label>
+    <textarea id="message" rows="2" placeholder="Send your message"></textarea>
+    <span class="input-line"></span>
+</div>
             
             <button type="submit" id="rsvpSubmitBtn" class="glow-button">
     <span class="btn-text">Send RSVP</span>
@@ -5423,7 +5526,7 @@ body.lightbox-open .nav-btn {
         </div>
         <h3 class="modal-title">RSVP Received</h3>
         <p class="modal-message">Your RSVP has been received with love.<br>We can't wait to celebrate with you.</p>
-        <button class="modal-btn" id="modalConfirmBtn">Thank You!</button>
+        <button class="modal-btn" id="modalConfirmBtn">Wonderful</button>
     </div>
 </div>
 
@@ -5504,23 +5607,26 @@ body.lightbox-open .nav-btn {
                         <span class="forced-input-line"></span>
                     </div>
                     
-                    <div class="forced-form-row">
-                        <div class="forced-form-group half">
-                            <label for="forcedAttending">Will you attend? *</label>
-                            <select id="forcedAttending" required>
-                                <option value="" disabled selected>— Select —</option>
-                                <option value="Yes, absolutely">Yes, absolutely 💕</option>
-                                <option value="Sadly, no">Sadly, no 🙏</option>
-                            </select>
-                            <span class="forced-input-line"></span>
-                        </div>
-                        
-                        <div class="forced-form-group half">
-                            <label for="forcedGuests">Number of Guests</label>
-                            <input type="number" id="forcedGuests" value="1" min="1" max="5">
-                            <span class="forced-input-line"></span>
-                        </div>
-                    </div>
+                   <div class="forced-form-row">
+    <div class="forced-form-group half">
+        <label for="forcedAttending">Will you attend? *</label>
+        <select id="forcedAttending" required>
+            <option value="" disabled selected>— Select —</option>
+            <option value="Yes, absolutely">Yes, absolutely 💕</option>
+            <option value="Sadly, no">Sadly, no 🙏</option>
+        </select>
+        <span class="forced-input-line"></span>
+    </div>
+    
+    <div class="forced-form-group half">
+        <label for="forcedGuests">Number of Guests (inc. you)</label>
+        <input type="number" id="forcedGuests" value="1" min="1" max="5">
+        <span class="forced-input-line"></span>
+    </div>
+</div>
+
+<!-- Dynamic Accompanying Guest Fields for Forced Modal -->
+<div id="forcedDynamicGuests" class="forced-dynamic-guests" style="display: none;"></div>
                     
                     <button type="submit" id="forcedRsvpSubmitBtn" class="forced-submit-btn">
                         <span class="btn-text">Submit RSVP</span>
@@ -6136,7 +6242,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===== CONFIGURATION - PASTE YOUR WEB APP URL HERE =====
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby8yfEFap9yV7Cn_2hi66RNBdRlOeghCGDmfyoV3l5tDEFtOkaPhcmc-fArF-k_61qlQg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdNvLibwchBGG6LkWCPKklrNSCQsbqbsCBhDvaYVQsbEiyJ3Vq7cv_P1CagZoaJk8RkQ/exec';
 // Example: 'https://script.google.com/macros/s/ABC123.../exec'
 
 // ===== SHARED RSVP SUBMISSION FUNCTION =====
@@ -6168,9 +6274,21 @@ if (rsvpForm) {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
         const attending = document.getElementById('attending').value;
-        const guests = document.getElementById('guests').value;
+        const guests = parseInt(document.getElementById('guests').value) || 1;
         const message = document.getElementById('message').value.trim();
         
+        // Collect accompanying guest names
+        const accompanyingGuests = [];
+        if (guests > 1) {
+            for (let i = 1; i < guests; i++) {
+                const guestField = document.getElementById(`accompanyingGuest${i}`);
+                if (guestField && guestField.value.trim()) {
+                    accompanyingGuests.push(guestField.value.trim());
+                }
+            }
+        }
+        
+        // Validation
         let hasError = false;
         
         if (!fullName) {
@@ -6213,8 +6331,9 @@ if (rsvpForm) {
                 fullName,
                 email,
                 attending,
-                guests: parseInt(guests),
-                message
+                guests: guests,
+                message,
+                accompanyingGuests: accompanyingGuests
             });
             
             submitBtn.classList.remove('loading');
@@ -6587,18 +6706,28 @@ if (slideshowOverlay) {
     }
     
 // Handle forced RSVP form submission
+// Handle forced RSVP form submission (UPDATED)
 if (forcedForm) {
     forcedForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // 🔥 GET SCRIPT_URL FROM GLOBAL SCOPE
         const SCRIPT_URL = window.SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbywjWdu64la0_CkRbas5O3pVYFcUj92PS0EsOCuVP3fZdNT5eJiFYAOeBCeZLEK7Bvk/exec';
         
-        // Get form values
         const fullName = document.getElementById('forcedFullName').value.trim();
         const email = document.getElementById('forcedEmail').value.trim();
         const attending = document.getElementById('forcedAttending').value;
-        const guests = document.getElementById('forcedGuests').value;
+        const guests = parseInt(document.getElementById('forcedGuests').value) || 1;
+        
+        // Collect accompanying guest names
+        const accompanyingGuests = [];
+        if (guests > 1) {
+            for (let i = 1; i < guests; i++) {
+                const guestField = document.getElementById(`forcedAccompanyingGuest${i}`);
+                if (guestField && guestField.value.trim()) {
+                    accompanyingGuests.push(guestField.value.trim());
+                }
+            }
+        }
         
         // Validation
         let hasError = false;
@@ -6629,16 +6758,15 @@ if (forcedForm) {
             forcedSubmitBtn.querySelector('.btn-icon').innerHTML = '<i class="fas fa-spinner"></i>';
         }
         
-        // 🔥 USE HIDDEN FORM METHOD
+        // Create hidden form
         const formId = 'forced-rsvp-form-' + Date.now();
         const hiddenForm = document.createElement('form');
         hiddenForm.id = formId;
         hiddenForm.method = 'POST';
-        hiddenForm.action = SCRIPT_URL;  // Now SCRIPT_URL is defined!
+        hiddenForm.action = SCRIPT_URL;
         hiddenForm.target = 'forced-iframe-' + Date.now();
         hiddenForm.style.display = 'none';
         
-        // Create hidden iframe
         const iframeId = 'forced-iframe-' + Date.now();
         const hiddenIframe = document.createElement('iframe');
         hiddenIframe.id = iframeId;
@@ -6646,14 +6774,15 @@ if (forcedForm) {
         hiddenIframe.style.display = 'none';
         document.body.appendChild(hiddenIframe);
         
-        // Add form fields
+        // Add fields
         const fields = {
             'fullName': fullName,
             'email': email,
             'attending': attending,
             'guests': guests,
             'message': '',
-            'source': 'forced-modal'
+            'source': 'forced-modal',
+            'accompanyingGuests': JSON.stringify(accompanyingGuests)
         };
         
         for (const [key, value] of Object.entries(fields)) {
@@ -6665,66 +6794,35 @@ if (forcedForm) {
         }
         
         document.body.appendChild(hiddenForm);
-        
-        // Submit the form
         hiddenForm.submit();
-        console.log('Forced RSVP form submitted');
         
         // Success handling
         setTimeout(function() {
-            // Save to storage
             try {
                 localStorage.setItem('wedding_rsvp_submitted', 'true');
                 sessionStorage.setItem('wedding_rsvp_submitted', 'true');
                 document.cookie = 'wedding_rsvp_submitted=true; max-age=31536000; path=/';
-                console.log('RSVP marked as submitted');
-            } catch(e) {
-                console.log('Storage error:', e);
-            }
+            } catch(e) {}
             
-            // Remove loading state
             if (forcedSubmitBtn) {
                 forcedSubmitBtn.classList.remove('loading');
                 forcedSubmitBtn.querySelector('.btn-icon').innerHTML = '<i class="fas fa-check-circle"></i>';
             }
             
-            // Hide forced modal
             if (typeof hideForcedModal === 'function') {
                 hideForcedModal();
-            } else {
-                const forcedModal = document.getElementById('forcedRsvpModal');
-                if (forcedModal) {
-                    forcedModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
             }
             
-            // Sync with main RSVP form
-            const mainFullName = document.getElementById('fullName');
-            const mainEmail = document.getElementById('email');
-            const mainAttending = document.getElementById('attending');
-            const mainGuests = document.getElementById('guests');
-            
-            if (mainFullName) mainFullName.value = fullName;
-            if (mainEmail) mainEmail.value = email;
-            if (mainAttending) mainAttending.value = attending;
-            if (mainGuests) mainGuests.value = guests;
-            
-            // Show success modal
             if (typeof showSuccessModal === 'function') {
                 showSuccessModal();
-            } else {
-                alert('Thank you! Your RSVP has been received with love. 💕');
             }
             
-            // Clean up
             setTimeout(function() {
                 if (hiddenForm.parentNode) hiddenForm.remove();
                 if (hiddenIframe.parentNode) hiddenIframe.remove();
             }, 1000);
             
         }, 500);
-        
     });
 }
     
@@ -7019,6 +7117,115 @@ function addCloseButtonToForcedModal() {
     if (closeBtn1) closeBtn1.addEventListener('click', closeForcedModal);
     if (closeBtn2) closeBtn2.addEventListener('click', closeForcedModal);
 }
+
+
+
+// ===== DYNAMIC ACCOMPANYING GUEST FIELDS =====
+
+// For Main RSVP Form
+function handleMainGuestCount() {
+    const guestsInput = document.getElementById('guests');
+    const container = document.getElementById('dynamicGuestsContainer');
+    
+    if (!guestsInput || !container) return;
+    
+    function updateFields() {
+        const count = parseInt(guestsInput.value) || 1;
+        
+        // If only 1 guest (just the main person), hide fields
+        if (count <= 1) {
+            container.style.display = 'none';
+            container.innerHTML = '';
+            return;
+        }
+        
+        // Show container
+        container.style.display = 'block';
+        
+        // Calculate how many accompanying guests (minus the main person)
+        const accompanyingCount = count - 1;
+        const currentFields = container.querySelectorAll('.accompanying-guest-field').length;
+        
+        // Add or remove fields as needed
+        if (accompanyingCount > currentFields) {
+            // Add more fields
+            for (let i = currentFields; i < accompanyingCount; i++) {
+                const fieldDiv = document.createElement('div');
+                fieldDiv.className = 'accompanying-guest-field';
+                fieldDiv.innerHTML = `
+                    <label for="accompanyingGuest${i + 1}">Accompanying Guest ${i + 1} Name</label>
+                    <input type="text" id="accompanyingGuest${i + 1}" placeholder="Full name of guest ${i + 1}">
+                    <span class="input-line"></span>
+                `;
+                container.appendChild(fieldDiv);
+            }
+        } else if (accompanyingCount < currentFields) {
+            // Remove excess fields
+            const fields = container.querySelectorAll('.accompanying-guest-field');
+            for (let i = currentFields - 1; i >= accompanyingCount; i--) {
+                fields[i].remove();
+            }
+        }
+    }
+    
+    guestsInput.addEventListener('input', updateFields);
+    guestsInput.addEventListener('change', updateFields);
+    
+    // Initial check
+    updateFields();
+}
+
+// For Forced Modal RSVP Form
+function handleForcedGuestCount() {
+    const guestsInput = document.getElementById('forcedGuests');
+    const container = document.getElementById('forcedDynamicGuests');
+    
+    if (!guestsInput || !container) return;
+    
+    function updateFields() {
+        const count = parseInt(guestsInput.value) || 1;
+        
+        if (count <= 1) {
+            container.style.display = 'none';
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.style.display = 'block';
+        
+        const accompanyingCount = count - 1;
+        const currentFields = container.querySelectorAll('.forced-accompanying-guest').length;
+        
+        if (accompanyingCount > currentFields) {
+            for (let i = currentFields; i < accompanyingCount; i++) {
+                const fieldDiv = document.createElement('div');
+                fieldDiv.className = 'forced-accompanying-guest';
+                fieldDiv.innerHTML = `
+                    <label for="forcedAccompanyingGuest${i + 1}">Accompanying Guest ${i + 1} Name</label>
+                    <input type="text" id="forcedAccompanyingGuest${i + 1}" placeholder="Full name of guest ${i + 1}">
+                    <span class="forced-input-line"></span>
+                `;
+                container.appendChild(fieldDiv);
+            }
+        } else if (accompanyingCount < currentFields) {
+            const fields = container.querySelectorAll('.forced-accompanying-guest');
+            for (let i = currentFields - 1; i >= accompanyingCount; i--) {
+                fields[i].remove();
+            }
+        }
+    }
+    
+    guestsInput.addEventListener('input', updateFields);
+    guestsInput.addEventListener('change', updateFields);
+    
+    updateFields();
+}
+
+// Initialize both when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    handleMainGuestCount();
+    handleForcedGuestCount();
+});
 
 </script>
 </body>
