@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -240,14 +241,14 @@
 }
 
         .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(63, 91, 69, 0.55) 0%, rgba(63, 91, 69, 0.35) 50%, rgba(111, 138, 109, 0.4) 100%);
-            z-index: 1;
-        }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+}
 
         .hero-inner {
             position: relative;
@@ -525,19 +526,18 @@
             width: 100%;
             min-height: 100vh;
             padding: 4rem 1.5rem;
-            background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop') center/cover no-repeat;
+            background: url('https://i.imgur.com/C79aP3o.jpeg?w=1200&h=800&fit=crop') center/cover no-repeat;
             overflow: hidden;
             isolation: isolate;
         }
 
         .entourage-cinematic::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(145deg, rgba(63, 91, 69, 0.88) 0%, rgba(85, 110, 80, 0.85) 100%);
-            backdrop-filter: blur(8px);
-            z-index: 1;
-        }
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    z-index: 1;
+}
 
         .entourage-container {
             position: relative;
@@ -2781,7 +2781,7 @@ body.modal-active {
 .timeline-section {
     position: relative;
     padding: var(--space-xl) 1.5rem;
-    background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop') center/cover no-repeat;
+    background: url('https://i.imgur.com/ywxZ0HN.png?w=1200&h=800&fit=crop') center/cover no-repeat;
     overflow: hidden;
     isolation: isolate;
 }
@@ -2791,12 +2791,7 @@ body.modal-active {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        145deg,
-        rgba(63, 91, 69, 0.88) 0%,
-        rgba(85, 110, 80, 0.85) 100%
-    );
-    backdrop-filter: blur(8px);
+    background: transparent;
     z-index: 1;
 }
 
@@ -2995,22 +2990,16 @@ body.modal-active {
 .gift-section {
     position: relative;
     padding: var(--space-xl) 1.5rem;
-    background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop') center/cover no-repeat;
+    background: url('https://i.imgur.com/7QE8kM9.png?w=1200&h=800&fit=crop') center/cover no-repeat;
     overflow: hidden;
     isolation: isolate;
 }
 
-/* Overlay same as timeline & entourage */
 .gift-section::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        145deg,
-        rgba(63, 91, 69, 0.88) 0%,
-        rgba(85, 110, 80, 0.85) 100%
-    );
-    backdrop-filter: blur(8px);
+    background: transparent;
     z-index: 1;
 }
 
@@ -4746,6 +4735,59 @@ body.lightbox-open .nav-btn {
         }
     }
 }
+
+
+
+
+
+
+
+/* Common fixed background for all three sections */
+.entourage-cinematic,
+.timeline-section,
+.gift-section {
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+/* Remove the old background-attachment if it exists */
+.entourage-cinematic {
+    background-attachment: fixed !important;
+}
+
+.timeline-section {
+    background-attachment: fixed !important;
+}
+
+.gift-section {
+    background-attachment: fixed !important;
+}
+
+
+
+
+.entourage-cinematic .cinematic-title,
+.timeline-section .section-title,
+.gift-section .section-title {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* Single rule for all 3 sections */
+.entourage-cinematic::before,
+.timeline-section::before,
+.gift-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 50, 35, 0.75);
+    backdrop-filter: blur(1px);
+    z-index: 1;
+}
+
 
     </style>
 </head>
@@ -6904,17 +6946,38 @@ revealElements.forEach(el => observer.observe(el));
 
 
 
-/* ===== PARALLAX DEPTH EFFECT ===== */
+/* ===== PARALLAX & FIXED BACKGROUND EFFECTS ===== */
+
+// Variable to track if hero is scrolled past
+let heroScrolledPast = false;
 
 window.addEventListener("scroll", () => {
     const scrolled = window.scrollY;
+    const heroSection = document.querySelector('.hero-section');
+    const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    
+    // Check if hero section is scrolled past
+    const newHeroScrolledPast = scrolled > heroHeight * 0.8;
+    
+    // Only activate when hero section is mostly out of view
+    if (newHeroScrolledPast !== heroScrolledPast) {
+        heroScrolledPast = newHeroScrolledPast;
+        
+        const sections = document.querySelectorAll('.entourage-cinematic, .timeline-section, .gift-section');
+        
+        sections.forEach(section => {
+            if (heroScrolledPast) {
+                section.style.backgroundAttachment = 'fixed';
+                console.log('Parallax activated for:', section.className);
+            } else {
+                section.style.backgroundAttachment = 'scroll';
+            }
+        });
+    }
 
+    // Existing hero parallax effect
     document.querySelectorAll(".hero-bg").forEach(el => {
         el.style.transform = `translateY(${scrolled * 0.2}px) scale(1.05)`;
-    });
-
-    document.querySelectorAll(".entourage-cinematic").forEach(el => {
-        el.style.backgroundPositionY = `${scrolled * 0.1}px`;
     });
 });
 
@@ -6956,6 +7019,7 @@ function addCloseButtonToForcedModal() {
     if (closeBtn1) closeBtn1.addEventListener('click', closeForcedModal);
     if (closeBtn2) closeBtn2.addEventListener('click', closeForcedModal);
 }
+
 </script>
 </body>
 </html>
